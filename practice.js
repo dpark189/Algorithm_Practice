@@ -168,3 +168,72 @@ var findMedianSortedArrays = function(nums1, nums2) {
     }
     return ans;
 };
+
+
+// Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+//
+// Example 1:
+//
+// Input: "babad"
+// Output: "bab"
+// Note: "aba" is also a valid answer.
+// Example 2:
+//
+// Input: "cbbd"
+// Output: "bb"
+
+var longestPalindrome = function(s) {
+  if (!s) return s;
+  if (checkPal(s)) return s;
+  const subStrs = subs(s);
+  const palSubs = subStrs.filter(str => {return checkPal(str);});
+  let largest = "";
+  let length = 0;
+  palSubs.forEach(el => {
+    const elLength = el.length;
+    if (elLength > length) {
+      largest = el;
+      length = elLength;
+    }
+  });
+  if (!largest) {
+    return s[0];
+  } else {
+    return largest;
+  }
+};
+
+
+function subs (str) {
+  const arr = str.split("");
+  const subs = [];
+  for (let i = 0; i < arr.length; i++) {
+    let temp = arr[i];
+    subs.push(arr[i]);
+    for (var j = i + 1; j < arr.length; j++) {
+      temp = temp + arr[j];
+        subs.push(temp);
+    }
+  }
+  return subs;
+}
+
+function checkPal (str) {
+  const arr = str.split("");
+  let bool = true;
+  for (var i = 0; i < Math.floor(arr.length/2) && bool === true; i++) {
+    if (arr[i] === arr[arr.length - 1 - i]) {
+      continue;
+    } else {
+      bool = false;
+      break;
+    }
+  }
+  return bool;
+}
+
+
+let str = "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth";
+console.log(longestPalindrome(str));
+// console.log(longestPalindrome("babab"));
+// console.log(checkPal("babab"));
