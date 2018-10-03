@@ -11,8 +11,8 @@
 // return [0, 1].
 
 var twoSum = function(nums, target) {
-    let ans = [];
-    for (let i = 0; i < nums.length; i++) {
+  let ans = [];
+  for (let i = 0; i < nums.length; i++) {
     let otherVal = target - nums[i];
     let otherId = nums.indexOf(target-nums[i]);
     if ( (otherId !== -1) && (otherId !== i)) {
@@ -200,7 +200,7 @@ var longestPalindrome = function(s) {
   } else {
     return largest;
   }
-}
+};
 
 
 function subs (str) {
